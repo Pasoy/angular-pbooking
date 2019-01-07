@@ -3,9 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
+// Import the new modules
+import { HeaderComponent } from './partials/header/header.component';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule
