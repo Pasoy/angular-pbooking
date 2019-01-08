@@ -1,12 +1,9 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {Rental} from './rental.module';
+const Rental = require('./models/rental');
 
-@Injectable()
-export class RentalService {
+class FakeDB {
 
-    private rentals: Rental[] = [
-        {
+    constructor() {
+        this.rentals = [{
             id: '1',
             title: 'Ya friends home',
             city: 'Vienna',
@@ -57,32 +54,27 @@ export class RentalService {
             dailyRate: 17,
             shared: true,
             createdAt: '11/01/2019'
-        }
-    ];
+        }]
+    }
 
+    async cleanDB() {
+        await Rental.remove({});
+    }
 
-    public getRentalById(rentalId: string): Observable<Rental> {
-        return new Observable<Rental>((observer) => {
+    pushRentalsToDB() {
+        this.rentals.forEach((rental) => {
+            const newRental = new Rental(rental);
 
-            setTimeout(() => {
-                const foundRental = this.rentals.find((rental) => {
-                    return rental.id === rentalId;
-                });
-
-                observer.next(foundRental);
-            }, 500);
-
+            newRental.save();
         });
     }
 
-    public getRentals(): Observable<Rental[]> {
-        return new Observable<Rental[]>((observer) => {
-
-            setTimeout(() => {
-                observer.next(this.rentals);
-            }, 1000);
-
-        });
+    seedDB() {
+        this.cleanDB();
+        this.pushRentalsToDB();
     }
 
 }
+
+
+module.exports = FakeDB;
