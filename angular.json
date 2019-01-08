@@ -105,7 +105,7 @@
               "**/node_modules/**"
             ]
           }
-        },
+        }
       }
     },
     "angular-cli-e2e": {
@@ -137,5 +137,10 @@
       }
     }
   },
-  "defaultProject": "angular-cli"
+  "defaultProject": "angular-cli",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
