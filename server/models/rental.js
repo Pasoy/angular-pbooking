@@ -32,7 +32,7 @@ const RentalSchema = new Schema({
         required: true
     },
     bedrooms: {
-        tyoe: Number
+        type: Number
     },
     shared: Boolean,
     description: {
